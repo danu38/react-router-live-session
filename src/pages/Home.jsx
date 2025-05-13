@@ -5,34 +5,37 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import MovieCard from "../components/MovieCard";
 
+
 const API_KEY = import.meta.env.VITE_API_KEY;
 const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
 
 const Home = () => {
   const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
+//   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetch(API_URL)
       .then((res) => res.json())
       .then((data) => {
         setMovies(data.results);
-        setLoading(false);
+        // setLoading(false);
         console.log(data.results);
       })
       .catch((err) => console.log(err));
   }, []);
 
   return (
-    <main>
+    <main className="movie-list">
       <h1>Popular Movies</h1>
-      <div>
+      <section>
+      <div className="movie-grid">
         {movies.map((movie) => (
           <Link to={`/movies/${movie.id}`} key={movie.id}>
             <MovieCard movie={movie} />
           </Link>
+       
         ))}
-      </div>
+      </div></section>
     </main>
   );
 };
