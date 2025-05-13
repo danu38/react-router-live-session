@@ -3,6 +3,8 @@ import Header from './components/Header'
 import Movies from './pages/Movies'
 import About from './pages/About'
 
+// The Header component will show in all "pages" It is outside of the routing scope.
+
 export const App = () => {
   return (
     <>
