@@ -7,10 +7,12 @@ export const App = () => {
   return (
     <>
       <Header />
+
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Movies />} />
           <Route path="/about" element={<About />} />
+          {/* <Route path="/movies/:movieId" element={<MovieDetails />} /> */}
         </Routes>
       </BrowserRouter>
 
