@@ -4,6 +4,8 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import MovieCard from '../components/MovieCard';
+import Loader from '../components/Loader';
+import ErrorMessage from '../components/ErrorMessage';
 
 const API_KEY = import.meta.env.VITE_API_KEY;
 const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&language=en-US&page=1`;
@@ -36,11 +38,10 @@ const Home = () => {
   }, []);
 
   if (loading) {
-    return <p>Loading Movies</p>; // loading component
+    return <Loader />; // Loader component
   }
-
   if (error) {
-    return <p>Something went wrong</p>; // error component
+    return <ErrorMessage />; //ErrorMessage component
   }
 
   //om allt är OK, rendera startsidan

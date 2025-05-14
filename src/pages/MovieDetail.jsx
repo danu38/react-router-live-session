@@ -1,6 +1,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import Loader from '../components/Loader';
+import ErrorMessage from '../components/ErrorMessage';
 
 // import ErrorMessage from '../components/ErrorMessage';
 
@@ -33,13 +35,14 @@ const MovieDetail = () => {
       });
   }, [movieId]);
 
-  // Om allt är OK, rendera startsidan
   if (loading) {
-    return <p>Loading...</p>;
+    return <Loader />; // Loader component
   }
   if (error) {
-    return <p>Something went wrong</p>; //ErrorMessage component
+    return <ErrorMessage />; //ErrorMessage component
   }
+
+  // Om allt är OK, rendera startsidan
 
   return (
     <div className='movie-detail'>
