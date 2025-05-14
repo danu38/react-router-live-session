@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Loader from "../components/Loader";
 import ErrorMessage from "../components/ErrorMessage";
 import { useNavigate } from "react-router-dom";
+import NotFound from "./NotFound";
 
 // import ErrorMessage from '../components/ErrorMessage';
 
@@ -41,8 +42,9 @@ const MovieDetail = () => {
     return <Loader />; // Loader component
   }
   if (error) {
-    return <ErrorMessage />; //ErrorMessage component
-  }
+  return <NotFound />;
+}
+
 const handleBack = () => {
     navigate('/');
   };
