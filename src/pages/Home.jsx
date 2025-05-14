@@ -13,11 +13,17 @@ const API_URL = `https://api.themoviedb.org/3/movie/popular?api_key=${API_KEY}&l
 const Home = () => {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showLoader, setShowLoader] = useState(false);
   const [error, setError] = useState(false);
 
   useEffect(() => {
     setLoading(true);
+    setShowLoader(false);
     setError(false);
+
+    const loaderTimer = setTimeout(() => {
+      setShowLoader(true); // Visa loader efter 300ms
+    }, 300);
 
     fetch(API_URL)
       .then((res) => {
@@ -29,15 +35,19 @@ const Home = () => {
       .then((data) => {
         setMovies(data.results);
         setLoading(false);
+        clearTimeout(loaderTimer); // Stoppa loader om vi hann först
       })
       .catch((err) => {
         console.log(err);
         setError(true);
         setLoading(false);
+        clearTimeout(loaderTimer); // Stoppa loader om vi hann först
       });
+
+    return () => clearTimeout(loaderTimer); // cleanup
   }, []);
 
-  if (loading) {
+  if (loading && showLoader) {
     return <Loader />; // Loader component
   }
   if (error) {
